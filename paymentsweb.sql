@@ -12,9 +12,17 @@ CREATE TABLE users (
     CurrWalletBal double(7,2),
     PRIMARY KEY (UserId)
 );
+alter table users add column email varchar(200);
 -- alter phoneno to unique
+alter table users add unique(PhoneNo);
 -- alter dateofbirth to date
+alter table users modify column DateOfBirth Date;
 -- alter userId auto increment.
+alter table users modify column UserId int unique key auto_increment;
+
+select * from users;
+select * from users where phoneno='989898' and PassWord='pass';
+desc users;
 
 select * from users;
 
@@ -41,8 +49,18 @@ CREATE TABLE BankAccounts (
     FOREIGN KEY (AcctTypeId) REFERENCES BankAccountTypes (BankAcctTypeId),
     PRIMARY KEY (BankAcctNo)
 );
-select * from  BankAccounts;
 
+alter table BankAccounts add foreign key (UserId) references Users(UserId);
+alter table TxnDetails add foreign key (UserId) references Users(UserId);
+
+
+select * from INFORMATION_SCHEMA.key_column_usage
+where table_name ='TxnDetails';
+
+
+select * from  INFORMATION_SCHEMA.TABLE_CONSTRAINTS 
+where table_name ='BankAccounts'
+and column_name='userid';
 
 CREATE TABLE TxnDetails (
     TxnId int(10) NOT NULL,
@@ -58,4 +76,6 @@ CREATE TABLE TxnDetails (
 );
 
 select * from TxnDetails;
+
+
 
