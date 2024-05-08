@@ -13,9 +13,6 @@
 		for(int i=0;i<ckArr.length;i++){
 			if(ckArr[i].getName().equals("uname")){
 				sessionUser = ckArr[i].getValue();
-	%>
-	
-	<%
 			}
 		}
 	%>

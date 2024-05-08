@@ -16,6 +16,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sat.tmf.dao.PaymentsWebDAO;
 import com.sat.tmf.dto.BankAccount;
@@ -41,13 +42,16 @@ public class LoginAuthServlet extends HttpServlet {
 		PaymentsWebDAO dao = new PaymentsWebDAO();
 		
 		if(dao.isValidUser(uname, upass)) {
+			
 			User user = dao.getUserByUserPhNo(uname);
 			
 			request.setAttribute("user", user);
+			HttpSession session = request.getSession();
+			session.setAttribute("user", user);
 			List<BankAccount> baList=  dao.getBADetailsByuserId(user.getUserId());
 			request.setAttribute("baList", baList);
-			Cookie ck = new Cookie("uname",uname);
-			response.addCookie(ck);
+//			Cookie ck = new Cookie("uname",uname);
+//			response.addCookie(ck);
 			RequestDispatcher rd =  request.getRequestDispatcher("/DashBoardServlet");
 			rd.forward(request, response);
 		}else {

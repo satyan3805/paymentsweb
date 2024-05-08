@@ -16,19 +16,25 @@
 
 <%
 		String sessionUser =null;
+
+		<%--
 		Cookie[] ckArr = request.getCookies();
 		for(int i=0;i<ckArr.length;i++){
 			if(ckArr[i].getName().equals("uname")){
 				sessionUser = ckArr[i].getValue();
+			}
+		}
+		--%>
+		
+		User sessionUser = (User)session.getAttribute("user");
 	%>
 				
 	<%
-			}
-		}
+
 	%>
 	
 	<%
-		if(sessionUser != null && !"".equals(sessionUser.trim())){
+		if(sessionUser != null)){
 			PaymentsWebDAO dao =new PaymentsWebDAO();
 			User user = dao.getUserByUserPhNo(sessionUser);
 			

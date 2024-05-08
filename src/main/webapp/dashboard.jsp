@@ -4,6 +4,17 @@
 <%@ page import="com.sat.tmf.dto.User" %>
 <%@ page import="com.sat.tmf.dto.BankAccount" %>
 <%@ page import="java.util.List" %>
+
+<style>
+.center {
+  margin: auto;
+  width: 100%;
+  border: 3px solid #73AD21;
+  padding: 10px;
+  justify-content:center;
+  display:flex;
+}
+</style>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +22,10 @@
 <title>Payments Web App Dash Board</title>
 </head>
 <body>
+	<%
+	User sessionUser = (User)session.getAttribute("user");
+	
+	%>
 	<center>
 		<div>
 		<table border="0">
@@ -25,6 +40,7 @@
 				</td>
 				<td align="right">
 					<form action="http://localhost:8080/PaymentsWebApp/LogoutServlet">
+						<input type="hidden" name="sessionUname" />
 						<input type="submit" value="Logout"/>
 					</form>
 				</td>
@@ -49,19 +65,14 @@
 				<%} %>
 					<td>
 						<form>
+							<input type="hidden" name="sessionUname" />
 							<input type="submit" value="Add Bank Account" />
 						</form>
 					</td>
 				</tr>
 			</table>
-			
-				
-			
-			
-			
 		</div>
 	</center>
-	
 	
 </body>
 </html>
